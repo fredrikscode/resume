@@ -1,0 +1,26 @@
+name: Generate PDF
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Convert webpage to PDF
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wkhtmltopdf
+        wkhtmltopdf https://resume.kihlstedt.io fredrik-kihlstedt-resume.pdf
+
+    - name: Upload PDF
+      uses: actions/upload-artifact@v2
+      with:
+        name: website
+        path: assets/pdf/fredrik-kihlstedt-resume.pdf
