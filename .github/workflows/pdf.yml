@@ -1,4 +1,4 @@
-name: Generate PDF
+name: Generate and Commit PDF
 
 on:
   push:
@@ -17,10 +17,17 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y wkhtmltopdf
-        wkhtmltopdf https://resume.kihlstedt.io fredrik-kihlstedt-resume.pdf
+        wkhtmltopdf https://resume.kihlstedt.io assets/pdf/generated.pdf  # replace <URL_OF_YOUR_WEBSITE> with the URL of your live website
 
-    - name: Upload PDF
-      uses: actions/upload-artifact@v2
-      with:
-        name: website
-        path: assets/pdf/fredrik-kihlstedt-resume.pdf
+    - name: Commit and push if changes exist
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add assets/pdf/generated.pdf
+        if git diff --exit-code --quiet
+        then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto-generated PDF from latest push"
+          git push
+        fi
