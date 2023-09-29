@@ -125,7 +125,6 @@ li{
 
 .green-checkmark {
     color: rgb(66, 212, 66);
-    border: 1px solid black;
     display: inline-block;
     padding: 2px;
     font-size: 20px; /* adjust the size as needed */
