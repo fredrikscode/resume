@@ -127,6 +127,7 @@ li{
     color: rgb(66, 212, 66);
     display: inline-block;
     padding: 2px;
+    border: 0;
     font-size: 20px; /* adjust the size as needed */
 }
 
