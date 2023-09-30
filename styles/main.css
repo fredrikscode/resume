@@ -125,6 +125,7 @@ li{
 
 .green-checkmark {
     color: rgb(66, 212, 66);
+    display:inline-block;
 }
 
 #wrapper--techstack__items{
